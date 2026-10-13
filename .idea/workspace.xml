@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66836b6b-1d9b-4f78-87b2-0943d3d5070b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/application.ex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/postal_code/store.ex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/postal_code/store_supervisor.ex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/top_supervisor.ex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/postal_code/store_test.exs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/postal_code/navigator.ex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elhex_delivery.iml" beforeDir="false" afterPath="$PROJECT_DIR$/elhex_delivery.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/elhex_delivery.ex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/postal_code/data_parser.ex" beforeDir="false" afterPath="$PROJECT_DIR$/lib/postal_code/data_parser.ex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mix.exs" beforeDir="false" afterPath="$PROJECT_DIR$/mix.exs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/elhex_delivery_test.exs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/postal_code/data_parser_test.exs" beforeDir="false" afterPath="$PROJECT_DIR$/test/postal_code/data_parser_test.exs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
