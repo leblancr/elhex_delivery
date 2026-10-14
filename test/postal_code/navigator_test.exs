@@ -17,10 +17,14 @@ defmodule ElhexDelivery.PostalCode.NavigatorTest do
       distance = Navigator.get_distance(06021, "95066")
       assert is_float(distance)
     end
-    test "postal code unexpected" do
-      assert_raise ArgumentError, fn ->
+    @tag :capture_log
+    test "postal code unexpected format" do
+      navigator_pid = Process.whereis(:postal_code_navigator)
+      reference = Process.monitor(navigator_pid)
+      catch_exit(
         Navigator.get_distance(06021.45, "95066")
-      end  # passing anonymous func to assert, no () at end, not a call
+      )  # catch_exit is a macro that takes an expression, not a do ... end block
+      assert_received({:DOWN, ^reference, :process, ^navigator_pid, {%ArgumentError{}, _}})
     end
   end
 

@@ -1,15 +1,28 @@
 defmodule ElhexDelivery.PostalCode.Navigator do
   @moduledoc false
 
-#  use GenServer
+  use GenServer
   alias :math, as: Math
   alias ElhexDelivery.PostalCode.Store  # then can just use last part
 
   # @radius 6371 km
   @radius 3959
 
+  def start_link do
+    GenServer.start_link(__MODULE__, [], name: :postal_code_navigator)  # name of process
+  end
+
+  def init(_) do
+    {:ok, nil}
+  end
+
   def get_distance(from, to) do
-    do_get_distance(from, to)
+    GenServer.call(:postal_code_navigator, {:get_distance, from, to})
+  end
+
+  def handle_call({:get_distance, from, to}, _from, state) do
+    distance = do_get_distance(from, to)
+    {:reply, distance, state}
   end
 
   defp calculate_distance({lat1, long1}, {lat2, long2}) do

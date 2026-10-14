@@ -2,7 +2,7 @@ defmodule ElhexDelivery.PostalCode.StoreSupervisor do
   @moduledoc false
 
   use Supervisor
-  alias ElhexDelivery.PostalCode.Store
+  alias ElhexDelivery.PostalCode.{Store, Navigator}
 
   def start_link do
     Supervisor.start_link(__MODULE__, [])
@@ -14,6 +14,10 @@ defmodule ElhexDelivery.PostalCode.StoreSupervisor do
       %{
         id: Store,
         start: {Store, :start_link, []}
+      },
+      %{
+        id: Navigator,
+        start: {Navigator, :start_link, []}
       }
     ]
 
