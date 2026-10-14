@@ -1,18 +1,38 @@
 defmodule ElhexDelivery.PostalCode.Navigator do
   @moduledoc false
 
+#  use GenServer
+  alias :math, as: Math
   alias ElhexDelivery.PostalCode.Store  # then can just use last part
+
+  # @radius 6371 km
+  @radius 3959
 
   def get_distance(from, to) do
     do_get_distance(from, to)
   end
 
   defp calculate_distance({lat1, long1}, {lat2, long2}) do
+    lat_diff = degrees_to_radians(lat2 - lat1)
+    long_diff = degrees_to_radians(long2 - long1)
 
+    lat1 = degrees_to_radians(lat1)
+    lat2 = degrees_to_radians(lat2)
+
+    cos_lat1 = Math.cos(lat1)
+    cos_lat2 = Math.cos(lat2)
+
+    sin_lat_diff_sq = Math.sin(lat_diff / 2) |> Math.pow(2)
+    sin_long_diff_sq = Math.sin(long_diff / 2) |> Math.pow(2)
+
+    a = sin_lat_diff_sq + (cos_lat1 * cos_lat2 * sin_long_diff_sq )
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+
+    @radius * c |> Float.round(2)
   end
 
   defp degrees_to_radians(degrees) do
-
+    degrees * (Math.pi / 180)
   end
 
   defp do_get_distance(from, to) do
@@ -27,12 +47,14 @@ defmodule ElhexDelivery.PostalCode.Navigator do
   end
 
   defp get_geolocation(postal_code) when is_integer(postal_code) do
-    postal_code = Integer.to_string(postal_code)
-    get_geolocation(postal_code)
+    get_geolocation(    postal_code
+    |> Integer.to_string()
+    |> String.pad_leading(5, "0")
+)  # function takes a string
   end
 
   defp get_geolocation(postal_code) do
-    error = "unexpected 'postal_code', received: (#(inspect(postal_code)))"
+    error = "unexpected 'postal_code', received: (#{inspect(postal_code)})"
     raise ArgumentError, error
   end
 end
